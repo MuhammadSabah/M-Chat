@@ -1,6 +1,8 @@
 // import 'package:dynamic_color/dynamic_color.dart';
+import 'package:final_chat_app/core/app_pages.dart';
 import 'package:final_chat_app/src/features/contacts/screens/contact_list_screen.dart';
 import 'package:final_chat_app/src/features/group/screens/group_screen.dart';
+import 'package:final_chat_app/src/navigation/route_generator.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,6 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      onGenerateRoute: RouteGenerator.generateRoute,
       debugShowCheckedModeBanner: false,
       theme: ThemeData().copyWith(
         textTheme: GoogleFonts.rubikTextTheme(),

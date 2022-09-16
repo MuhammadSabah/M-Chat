@@ -1,4 +1,5 @@
-import 'package:final_chat_app/src/features/group/screens/group_screen.dart';
+import 'package:final_chat_app/core/app_pages.dart';
+import 'package:final_chat_app/src/features/contacts/widgets/contact_card.dart';
 import 'package:flutter/material.dart';
 
 class ContactListScreen extends StatefulWidget {
@@ -17,11 +18,13 @@ class _ContactListScreenState extends State<ContactListScreen> {
         centerTitle: true,
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Row(
-            mainAxisSize: MainAxisSize.max,
-            children: [],
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, AppScreens.chatPath);
+            },
+            child: const ContactCard(),
           ),
         ],
       ),
