@@ -1,4 +1,5 @@
 // import 'package:dynamic_color/dynamic_color.dart';
+import 'package:dynamic_color/dynamic_color.dart';
 import 'package:final_chat_app/core/app_pages.dart';
 import 'package:final_chat_app/src/features/contacts/screens/contact_list_screen.dart';
 import 'package:final_chat_app/src/features/group/screens/group_screen.dart';
@@ -12,27 +13,31 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+  static final _defaultLightColorScheme =
+      ColorScheme.fromSwatch(primarySwatch: Colors.blue);
+
+  static final _defaultDarkColorScheme = ColorScheme.fromSwatch(
+      primarySwatch: Colors.blue, brightness: Brightness.dark);
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      onGenerateRoute: RouteGenerator.generateRoute,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData().copyWith(
-        textTheme: GoogleFonts.rubikTextTheme(),
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.red),
-        useMaterial3: true,
-      ),
-      darkTheme: ThemeData().copyWith(
-        textTheme: GoogleFonts.rubikTextTheme(),
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.red,
-          brightness: Brightness.dark,
-        ),
-        useMaterial3: true,
-      ),
-      themeMode: ThemeMode.light,
-      home: const HomeScreen(),
+    return DynamicColorBuilder(
+      builder: (lightDynamic, darkDynamic) {
+        return MaterialApp(
+          onGenerateRoute: RouteGenerator.generateRoute,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            colorScheme: lightDynamic ?? _defaultLightColorScheme,
+            useMaterial3: true,
+          ),
+          darkTheme: ThemeData(
+            colorScheme: darkDynamic ?? _defaultDarkColorScheme,
+            useMaterial3: true,
+          ),
+          themeMode: ThemeMode.light,
+          home: const HomeScreen(),
+        );
+      },
     );
   }
 }
