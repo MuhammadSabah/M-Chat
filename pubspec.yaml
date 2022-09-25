@@ -38,6 +38,8 @@ dependencies:
   cupertino_icons: ^1.0.2
   dynamic_color: ^1.5.4
   google_fonts: ^3.0.1
+  intl: ^0.17.0
+  bubble: ^1.2.1
 
 dev_dependencies:
   flutter_test:

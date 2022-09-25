@@ -1,6 +1,6 @@
 import 'package:final_chat_app/core/app_pages.dart';
 import 'package:final_chat_app/main.dart';
-import 'package:final_chat_app/src/features/chat/screens/chat_messages_screen.dart';
+import 'package:final_chat_app/src/features/chat/screens/chat_screen.dart';
 import 'package:final_chat_app/src/features/contacts/screens/contact_list_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -19,7 +19,7 @@ class RouteGenerator {
         );
       case AppScreens.chatPath:
         return MaterialPageRoute(
-          builder: (context) => const ChatMessagesScreen(),
+          builder: (context) => const ChatScreen(),
         );
 
       default:

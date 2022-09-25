@@ -29,6 +29,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton.extended(
+        heroTag: null,
         onPressed: () {},
         tooltip: 'Add contact',
         label: const Text('Add Contact'),
