@@ -1,5 +1,8 @@
-import 'package:final_chat_app/core/app_pages.dart';
-import 'package:final_chat_app/main.dart';
+import 'package:final_chat_app/core/app_screens.dart';
+import 'package:final_chat_app/home_screen.dart';
+import 'package:final_chat_app/src/features/add_contact/screens/add_contact_screen.dart';
+import 'package:final_chat_app/src/features/auth/screens/otp_screen.dart';
+import 'package:final_chat_app/src/features/auth/screens/register_screen.dart';
 import 'package:final_chat_app/src/features/chat/screens/chat_screen.dart';
 import 'package:final_chat_app/src/features/contacts/screens/contact_list_screen.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +23,18 @@ class RouteGenerator {
       case AppScreens.chatPath:
         return MaterialPageRoute(
           builder: (context) => const ChatScreen(),
+        );
+      case AppScreens.registerPath:
+        return MaterialPageRoute(
+          builder: (context) => const RegisterScreen(),
+        );
+      case AppScreens.otpPath:
+        return MaterialPageRoute(
+          builder: (context) => OTPScreen(),
+        );
+      case AppScreens.selectContactPath:
+        return MaterialPageRoute(
+          builder: (context) => AddContactScreen(),
         );
 
       default:

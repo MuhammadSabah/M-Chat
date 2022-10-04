@@ -21,13 +21,13 @@ class GroupListScreen extends StatelessWidget {
           // ),
         ],
       ),
-      // floatingActionButton: FloatingActionButton.extended(
-      //   heroTag: null,
-      //   onPressed: () {},
-      //   tooltip: 'New group',
-      //   label: const Text('New group'),
-      //   icon: const Icon(Icons.add),
-      // ),
+      floatingActionButton: FloatingActionButton.extended(
+        heroTag: null,
+        onPressed: () {},
+        tooltip: 'New group',
+        label: const Text('New group'),
+        icon: const Icon(Icons.add),
+      ),
     );
   }
 }
