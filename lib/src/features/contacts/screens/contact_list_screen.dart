@@ -1,5 +1,6 @@
 import 'package:final_chat_app/core/app_screens.dart';
 import 'package:final_chat_app/src/features/contacts/widgets/contact_card.dart';
+import 'package:final_chat_app/src/features/contacts/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class ContactListScreen extends StatefulWidget {
@@ -19,60 +20,36 @@ class _ContactListScreenState extends State<ContactListScreen> {
       child: Scaffold(
         body: SafeArea(
           child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10)
                         .copyWith(bottom: 18),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(50),
-                  child: Material(
-                    borderRadius: BorderRadius.circular(50),
-                    child: InkWell(
-                      onTap: () {},
-                      child: Ink(
-                        child: TextField(
-                          textAlignVertical: TextAlignVertical.center,
-                          decoration: InputDecoration(
-                            isCollapsed: true,
-                            prefixIcon: const Icon(
-                              Icons.menu,
-                              color: Colors.black,
-                            ),
-                            suffixIcon: const Padding(
-                              padding: EdgeInsets.all(10.0),
-                              child: CircleAvatar(
-                                backgroundColor: Colors.red,
-                              ),
-                            ),
-                            hintText: 'Search in chat',
-                            hintStyle: TextStyle(fontSize: 17),
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(50),
-                              borderSide: BorderSide.none,
-                            ),
-                            filled: true,
-                            fillColor: Theme.of(context)
-                                .colorScheme
-                                .secondaryContainer
-                                .withOpacity(0.5),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                child: SearchField(
+                  hintText: 'Search in chat',
                 ),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
-                  InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, AppScreens.chatPath);
-                    },
-                    child: const ContactCard(),
-                  ),
-                ],
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 14.0)
+                    .copyWith(bottom: 4),
+                child: Text('Chats'),
+              ),
+              Expanded(
+                child: ListView.separated(
+                  separatorBuilder: (context, index) {
+                    return const SizedBox(height: 8);
+                  },
+                  itemCount: 4,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      onTap: () {
+                        Navigator.pushNamed(context, AppScreens.chatPath);
+                      },
+                      child: const ContactCard(),
+                    );
+                  },
+                ),
               ),
             ],
           ),

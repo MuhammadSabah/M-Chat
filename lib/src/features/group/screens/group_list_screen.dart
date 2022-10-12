@@ -1,3 +1,6 @@
+import 'package:final_chat_app/core/app_screens.dart';
+import 'package:final_chat_app/src/features/contacts/widgets/contact_card.dart';
+import 'package:final_chat_app/src/features/contacts/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class GroupListScreen extends StatelessWidget {
@@ -6,21 +9,39 @@ class GroupListScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("Groups"),
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-      ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          // InkWell(
-          //   onTap: () {
-          // Navigator.pushNamed(context, AppScreens.chatPath);
-          //   },
-          // child: const ContactCard(),
-          // ),
-        ],
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10)
+                      .copyWith(bottom: 18),
+              child: SearchField(
+                hintText: 'Search in groups',
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14.0)
+                  .copyWith(bottom: 4),
+              child: Text('Groups'),
+            ),
+            Expanded(
+              child: ListView.separated(
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 8);
+                },
+                itemCount: 4,
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {},
+                    child: const ContactCard(),
+                  );
+                },
+              ),
+            ),
+          ],
+        ),
       ),
       floatingActionButton: FloatingActionButton.extended(
         heroTag: null,

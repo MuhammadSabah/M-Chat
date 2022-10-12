@@ -10,7 +10,7 @@ class ContactCard extends StatelessWidget {
     return Ink(
       height: screenHeight / 12,
       width: screenWidth,
-      color: Colors.red,
+      color: Colors.grey.shade100,
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 14.0),
         child: Row(
@@ -19,8 +19,8 @@ class ContactCard extends StatelessWidget {
             Row(
               children: [
                 Ink(
-                  height: screenHeight / 16,
-                  width: screenWidth / 8.5,
+                  height: screenHeight / 17,
+                  width: screenWidth / 9.0,
                   decoration: const BoxDecoration(
                     color: Colors.green,
                     borderRadius: BorderRadius.all(
