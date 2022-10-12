@@ -79,7 +79,7 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
             ),
             counterText: ' ',
             filled: true,
-            hintText: 'Phone number',
+            hintText: _country?.example,
           ),
         ),
       ),

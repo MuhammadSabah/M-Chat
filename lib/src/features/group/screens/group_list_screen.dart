@@ -9,6 +9,7 @@ class GroupListScreen extends StatelessWidget {
       appBar: AppBar(
         title: const Text("Groups"),
         centerTitle: true,
+        automaticallyImplyLeading: false,
       ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.start,

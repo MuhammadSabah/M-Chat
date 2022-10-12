@@ -24,12 +24,14 @@ class _RegisterScreenState extends State<RegisterScreen> {
       },
       child: Scaffold(
         appBar: AppBar(
+          automaticallyImplyLeading: false,
+          toolbarHeight: appBarHeight,
           backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
-          leading: IconButton(
-            onPressed: () {},
-            icon: const Icon(Icons.arrow_back),
+          title: Column(
+            children: [
+              const Text('Welcome!'),
+            ],
           ),
-          title: const Text('Welcome!'),
           centerTitle: false,
         ),
         body: SafeArea(

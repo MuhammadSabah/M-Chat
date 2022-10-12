@@ -1,4 +1,3 @@
-// import 'package:dynamic_color/dynamic_color.dart';
 import 'package:dynamic_color/dynamic_color.dart';
 import 'package:final_chat_app/src/features/auth/screens/register_screen.dart';
 import 'package:final_chat_app/src/navigation/route_generator.dart';

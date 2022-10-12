@@ -41,6 +41,13 @@ dependencies:
   intl: ^0.17.0
   bubble: ^1.2.1
   country_picker: ^2.0.16
+  firebase_core: ^1.24.0
+  cloud_firestore: ^3.5.1
+  firebase_auth: ^3.11.2
+  firebase_storage: ^10.3.11
+  image_picker: ^0.8.6
+  uuid: ^3.0.6
+  cached_network_image: ^3.2.2
 
 dev_dependencies:
   flutter_test:

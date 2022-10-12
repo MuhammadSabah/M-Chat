@@ -34,6 +34,7 @@ class _ContactListScreenState extends State<ContactListScreen> {
                         child: TextField(
                           textAlignVertical: TextAlignVertical.center,
                           decoration: InputDecoration(
+                            isCollapsed: true,
                             prefixIcon: const Icon(
                               Icons.menu,
                               color: Colors.black,
