@@ -2,9 +2,18 @@ import 'package:dynamic_color/dynamic_color.dart';
 import 'package:final_chat_app/src/features/auth/screens/register_screen.dart';
 import 'package:final_chat_app/src/navigation/route_generator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-void main() {
+void main() async {
+  GoogleFonts.config.allowRuntimeFetching = false;
+  WidgetsFlutterBinding.ensureInitialized();
+  await SystemChrome.setPreferredOrientations(
+    [
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ],
+  );
   runApp(const MyApp());
 }
 
@@ -46,5 +55,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-

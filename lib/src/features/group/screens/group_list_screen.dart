@@ -1,4 +1,3 @@
-import 'package:final_chat_app/core/app_screens.dart';
 import 'package:final_chat_app/src/features/contacts/widgets/contact_card.dart';
 import 'package:final_chat_app/src/features/contacts/widgets/search_field.dart';
 import 'package:flutter/material.dart';
