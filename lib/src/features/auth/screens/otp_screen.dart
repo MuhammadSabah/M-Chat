@@ -39,7 +39,7 @@ class OTPScreen extends StatelessWidget {
                 const Spacer(),
                 BottomNextButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, AppScreens.home);
+                    Navigator.pushNamed(context, AppScreens.userInformationPath);
                     return FocusManager.instance.primaryFocus?.unfocus();
                   },
                 ),

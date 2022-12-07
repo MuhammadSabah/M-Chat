@@ -28,8 +28,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
           toolbarHeight: appBarHeight,
           backgroundColor: Theme.of(context).colorScheme.secondaryContainer,
           title: Column(
-            children: [
-              const Text('Welcome!'),
+            children: const [
+              Text('Welcome!'),
             ],
           ),
           centerTitle: false,
