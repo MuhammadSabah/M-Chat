@@ -75,6 +75,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                         ),
                       ),
                       BottomNextButton(
+                        text: 'Next',
                         onPressed: () {
                           Navigator.pushNamed(context, AppScreens.otpPath);
                           return FocusManager.instance.primaryFocus?.unfocus();

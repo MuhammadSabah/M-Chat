@@ -7,8 +7,10 @@ class BottomNextButton extends StatelessWidget {
   const BottomNextButton({
     super.key,
     required this.onPressed,
+    required this.text,
   });
   final Function()? onPressed;
+  final String text;
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -19,9 +21,9 @@ class BottomNextButton extends StatelessWidget {
           foregroundColor: Colors.white,
         ),
         onPressed: onPressed,
-        child: const Text(
-          'Next',
-          style: TextStyle(
+        child: Text(
+          text,
+          style: const TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 16,
           ),

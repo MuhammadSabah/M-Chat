@@ -38,6 +38,7 @@ class OTPScreen extends StatelessWidget {
                 OTPForm(otpFormKey: otpFormKey),
                 const Spacer(),
                 BottomNextButton(
+                  text: 'Next',
                   onPressed: () {
                     Navigator.pushNamed(context, AppScreens.userInformationPath);
                     return FocusManager.instance.primaryFocus?.unfocus();
