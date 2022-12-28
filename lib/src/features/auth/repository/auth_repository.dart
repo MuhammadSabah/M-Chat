@@ -6,6 +6,7 @@ import 'package:final_chat_app/home_screen.dart';
 import 'package:final_chat_app/src/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:riverpod/riverpod.dart';
 import 'dart:io';
 
@@ -58,8 +59,14 @@ class AuthRepository {
         codeAutoRetrievalTimeout: (verificationId) {},
       );
     } on FirebaseAuthException catch (e) {
-      showSnackbar(
-          context: context, content: e.message ?? 'Some error occurred!');
+      Get.snackbar(
+        '❌',
+        e.message ?? 'Some error occurred!',
+        snackPosition: SnackPosition.TOP,
+        forwardAnimationCurve: Curves.elasticInOut,
+        reverseAnimationCurve: Curves.easeOut,
+        colorText: Colors.black,
+      );
     }
   }
 
@@ -82,7 +89,14 @@ class AuthRepository {
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
-      showSnackbar(context: context, content: e.message!);
+      Get.snackbar(
+        '❌',
+        e.message ?? 'Some error occurred!',
+        snackPosition: SnackPosition.TOP,
+        forwardAnimationCurve: Curves.elasticInOut,
+        reverseAnimationCurve: Curves.easeOut,
+        colorText: Colors.black,
+      );
     }
   }
 

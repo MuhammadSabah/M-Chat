@@ -49,6 +49,7 @@ dependencies:
   cached_network_image: ^3.2.2
   riverpod: ^2.1.1
   flutter_riverpod: ^2.1.1
+  get: ^4.6.5
 
 dev_dependencies:
   flutter_test:

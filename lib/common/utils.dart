@@ -1,35 +1,41 @@
 import 'dart:io';
-
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-void showSnackbar({
-  required BuildContext context,
-  required String content,
-}) {
-  ScaffoldMessenger.of(context).showSnackBar(
-    SnackBar(
-      content: Text(content),
-    ),
-  );
-}
+// void showCustomSnackbar({
+//   required BuildContext context,
+//   required String content,
+// }) {
+//   ScaffoldMessenger.of(context).showSnackBar(
+//     SnackBar(
+//       content: Text(content),
+//     ),
+//   );
+// }
 
-Future<File?> pickImageFromGallery(BuildContext context) async {
+Future<File?> pickImageFromGallery() async {
   File? image;
   try {
     final pickedImage =
         await ImagePicker().pickImage(source: ImageSource.gallery);
-
     if (pickedImage != null) {
       image = File(pickedImage.path);
     }
   } catch (e) {
-    showSnackbar(context: context, content: e.toString());
+    Get.snackbar(
+      '❌',
+      e.toString(),
+      snackPosition: SnackPosition.TOP,
+      forwardAnimationCurve: Curves.elasticInOut,
+      reverseAnimationCurve: Curves.easeOut,
+      colorText: Colors.black,
+    );
   }
   return image;
 }
 
-Future<File?> pickVideoFromGallery(BuildContext context) async {
+Future<File?> pickVideoFromGallery() async {
   File? video;
   try {
     final pickedVideo =
@@ -39,7 +45,14 @@ Future<File?> pickVideoFromGallery(BuildContext context) async {
       video = File(pickedVideo.path);
     }
   } catch (e) {
-    showSnackbar(context: context, content: e.toString());
+    Get.snackbar(
+      '❌',
+      e.toString(),
+      snackPosition: SnackPosition.TOP,
+      forwardAnimationCurve: Curves.elasticInOut,
+      reverseAnimationCurve: Curves.easeOut,
+      colorText: Colors.black,
+    );
   }
   return video;
 }
