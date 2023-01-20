@@ -10,8 +10,6 @@ import 'package:flutter/material.dart';
 
 class RouteGenerator {
   static Route<dynamic> generateRoute(RouteSettings settings) {
-    final args = settings.arguments;
-
     switch (settings.name) {
       case AppScreens.home:
         return MaterialPageRoute(
@@ -22,16 +20,23 @@ class RouteGenerator {
           builder: (context) => const ContactListScreen(),
         );
       case AppScreens.chatPath:
+        final args = settings.arguments as Map<String, dynamic>;
+        final name = args['name'];
+        final uid = args['uid'];
         return MaterialPageRoute(
-          builder: (context) => const ChatScreen(),
+          builder: (context) => ChatScreen(
+            name: name,
+            uid: uid,
+          ),
         );
       case AppScreens.registerPath:
         return MaterialPageRoute(
           builder: (context) => const RegisterScreen(),
         );
       case AppScreens.otpPath:
+        final verifictionID = settings.arguments as String;
         return MaterialPageRoute(
-          builder: (context) => OTPScreen(),
+          builder: (context) => OTPScreen(verificationID: verifictionID),
         );
       case AppScreens.selectContactPath:
         return MaterialPageRoute(

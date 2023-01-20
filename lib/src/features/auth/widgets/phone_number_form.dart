@@ -2,13 +2,17 @@ import 'package:country_picker/country_picker.dart';
 import 'package:flutter/material.dart';
 
 class PhoneNumberForm extends StatefulWidget {
-  const PhoneNumberForm({
+  PhoneNumberForm({
     super.key,
     required this.formKey,
     required this.phoneNumberController,
+    required this.country,
+    required this.onTap,
   });
   final GlobalKey<FormState> formKey;
   final TextEditingController phoneNumberController;
+  Country? country;
+  Function()? onTap;
 
   @override
   State<PhoneNumberForm> createState() => _PhoneNumberFormState();
@@ -16,7 +20,6 @@ class PhoneNumberForm extends StatefulWidget {
 
 class _PhoneNumberFormState extends State<PhoneNumberForm> {
   //
-  Country? _country;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +36,9 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
             if (value == null || value.isEmpty) {
               return 'Phone number required';
             }
+            if (widget.country == null) {
+              return 'Country code required';
+            }
             return null;
           },
           style: Theme.of(context).textTheme.bodyText1,
@@ -46,17 +52,7 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
           textInputAction: TextInputAction.done,
           decoration: InputDecoration(
             prefixIcon: GestureDetector(
-              onTap: () {
-                showCountryPicker(
-                  context: context,
-                  onSelect: (Country country) {
-                    setState(() {
-                      _country = country;
-                    });
-                    return FocusManager.instance.primaryFocus?.unfocus();
-                  },
-                );
-              },
+              onTap: widget.onTap,
               child: Padding(
                 padding: const EdgeInsets.only(left: 6.0, right: 8.0),
                 child: Row(
@@ -65,9 +61,9 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
                   children: [
                     SizedBox(
                       child: Text(
-                        _country == null
+                        widget.country == null
                             ? ' '
-                            : '+${_country!.phoneCode} ${_country!.flagEmoji}',
+                            : '+${widget.country!.phoneCode} ${widget.country!.flagEmoji}',
                         style: const TextStyle(fontSize: 15),
                       ),
                     ),
@@ -79,7 +75,7 @@ class _PhoneNumberFormState extends State<PhoneNumberForm> {
             ),
             counterText: ' ',
             filled: true,
-            hintText: _country?.example,
+            hintText: widget.country?.example,
           ),
         ),
       ),

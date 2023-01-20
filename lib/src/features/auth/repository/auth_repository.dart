@@ -27,7 +27,6 @@ class AuthRepository {
     required this.firestore,
   });
 
-  // Get user from firestore
   Future<UserModel?> getUserData() async {
     DocumentSnapshot<Map<String, dynamic>> userData =
         await firestore.collection('users').doc(auth.currentUser?.uid).get();
@@ -81,6 +80,7 @@ class AuthRepository {
         verificationId: verificationId,
         smsCode: userOTP,
       );
+      print(credential);
       await auth.signInWithCredential(credential);
       // ignore: use_build_context_synchronously
       Navigator.pushNamedAndRemoveUntil(
@@ -89,14 +89,15 @@ class AuthRepository {
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
-      Get.snackbar(
-        '❌',
-        e.message ?? 'Some error occurred!',
-        snackPosition: SnackPosition.TOP,
-        forwardAnimationCurve: Curves.elasticInOut,
-        reverseAnimationCurve: Curves.easeOut,
-        colorText: Colors.black,
-      );
+      print(e);
+      // Get.snackbar(
+      //   '❌',
+      //   e.message ?? 'Some error occurred!',
+      //   snackPosition: SnackPosition.TOP,
+      //   forwardAnimationCurve: Curves.elasticInOut,
+      //   reverseAnimationCurve: Curves.easeOut,
+      //   colorText: Colors.black,
+      // );
     }
   }
 
@@ -107,6 +108,7 @@ class AuthRepository {
     required ProviderRef ref,
     required BuildContext context,
   }) async {
+    print(auth.currentUser!.uid);
     String uid = auth.currentUser!.uid;
     String photoUrl =
         'https://images.unsplash.com/photo-1661586762551-b595e65388ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60';
@@ -128,15 +130,10 @@ class AuthRepository {
 
     await firestore.collection('users').doc(uid).set(user.toMap());
     // ignore: use_build_context_synchronously
-    Navigator.pushAndRemoveUntil(
-        context,
-        MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        ),
-        (route) => false);
+    Navigator.pushNamedAndRemoveUntil(
+        context, AppScreens.home, (route) => false);
   }
 
-  //
   Stream<UserModel> userData(String userId) {
     return firestore.collection('users').doc(userId).snapshots().map(
           (event) => UserModel.fromMap(

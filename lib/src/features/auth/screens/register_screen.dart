@@ -1,18 +1,42 @@
+import 'package:country_picker/country_picker.dart';
 import 'package:final_chat_app/core/app_screens.dart';
+import 'package:final_chat_app/src/features/auth/controller/auth_controller.dart';
 import 'package:final_chat_app/src/features/auth/widgets/bottom_next_button.dart';
 import 'package:final_chat_app/src/features/auth/widgets/phone_number_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends ConsumerStatefulWidget {
   const RegisterScreen({super.key});
 
   @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
+  ConsumerState<RegisterScreen> createState() => _RegisterScreenState();
 }
 
-class _RegisterScreenState extends State<RegisterScreen> {
+class _RegisterScreenState extends ConsumerState<RegisterScreen> {
   final TextEditingController phoneNumberController = TextEditingController();
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+  Country? _country;
+
+  void sendPhoneNumber() {
+    debugPrint(phoneNumberController.text);
+    String phoneNumber = phoneNumberController.text.trim();
+    if (_country != null && phoneNumberController.text.isNotEmpty) {
+      ref
+          .read(authControllerProvider)
+          .signInWithPhone(context, '+${_country!.phoneCode}$phoneNumber');
+    } else {
+      Get.snackbar(
+        '❌',
+        'Field is empty',
+        snackPosition: SnackPosition.TOP,
+        forwardAnimationCurve: Curves.elasticInOut,
+        reverseAnimationCurve: Curves.easeOut,
+        colorText: Colors.black,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -70,6 +94,19 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             PhoneNumberForm(
                               formKey: formKey,
                               phoneNumberController: phoneNumberController,
+                              country: _country,
+                              onTap: () {
+                                showCountryPicker(
+                                  context: context,
+                                  onSelect: (Country country) {
+                                    setState(() {
+                                      _country = country;
+                                    });
+                                    return FocusManager.instance.primaryFocus
+                                        ?.unfocus();
+                                  },
+                                );
+                              },
                             ),
                           ],
                         ),
@@ -77,8 +114,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       BottomNextButton(
                         text: 'Next',
                         onPressed: () {
-                          Navigator.pushNamed(context, AppScreens.otpPath);
-                          return FocusManager.instance.primaryFocus?.unfocus();
+                          print(_country);
+
+                          if (formKey.currentState!.validate() &&
+                              _country != null) {
+                            sendPhoneNumber();
+                          }
+                          FocusManager.instance.primaryFocus?.unfocus();
                         },
                       ),
                     ],

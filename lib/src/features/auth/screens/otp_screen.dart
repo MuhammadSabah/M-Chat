@@ -1,14 +1,31 @@
 import 'package:final_chat_app/core/app_screens.dart';
+import 'package:final_chat_app/src/features/auth/controller/auth_controller.dart';
 import 'package:final_chat_app/src/features/auth/widgets/bottom_next_button.dart';
 import 'package:final_chat_app/src/features/auth/widgets/otp_form.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class OTPScreen extends StatelessWidget {
-  OTPScreen({super.key});
+class OTPScreen extends ConsumerWidget {
+  OTPScreen({super.key, required this.verificationID});
 
   GlobalKey<FormState> otpFormKey = GlobalKey<FormState>();
+  final String verificationID;
+
+  final TextEditingController otp1 = TextEditingController();
+  final TextEditingController otp2 = TextEditingController();
+  final TextEditingController otp3 = TextEditingController();
+  final TextEditingController otp4 = TextEditingController();
+  final TextEditingController otp5 = TextEditingController();
+  final TextEditingController otp6 = TextEditingController();
+
+  void verifyOTP(WidgetRef ref, BuildContext context, String userOTP) {
+    ref
+        .read(authControllerProvider)
+        .verifyOTP(context, verificationID, userOTP);
+  }
+
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
         return FocusManager.instance.primaryFocus?.unfocus();
@@ -31,17 +48,34 @@ class OTPScreen extends StatelessWidget {
                 const SizedBox(
                   height: 4,
                 ),
-                const Text('We have sent the code verification to'),
+                const Text('We have sent the code verification'),
                 const SizedBox(
                   height: 16,
                 ),
-                OTPForm(otpFormKey: otpFormKey),
+                OTPForm(
+                  otpFormKey: otpFormKey,
+                  otp1: otp1,
+                  otp2: otp2,
+                  otp3: otp3,
+                  otp4: otp4,
+                  otp5: otp5,
+                  otp6: otp6,
+                ),
                 const Spacer(),
                 BottomNextButton(
                   text: 'Next',
                   onPressed: () {
-                    Navigator.pushNamed(context, AppScreens.userInformationPath);
-                    return FocusManager.instance.primaryFocus?.unfocus();
+                    String otpValue = otp1.text +
+                        otp2.text +
+                        otp3.text +
+                        otp4.text +
+                        otp5.text +
+                        otp6.text;
+
+                    print("******* OTP VALUE: ******" + otpValue);
+                    print("******* OTP VALUE1: ******" + otp1.text);
+                    verifyOTP(ref, context, otpValue);
+                    FocusManager.instance.primaryFocus?.unfocus();
                   },
                 ),
               ],

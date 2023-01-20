@@ -1,14 +1,23 @@
+import 'package:final_chat_app/src/features/auth/controller/auth_controller.dart';
 import 'package:final_chat_app/src/features/chat/widgets/chat_messages.dart';
+import 'package:final_chat_app/src/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ChatScreen extends StatefulWidget {
-  const ChatScreen({super.key});
+class ChatScreen extends ConsumerStatefulWidget {
+  const ChatScreen({
+    super.key,
+    required this.name,
+    required this.uid,
+  });
 
+  final String name;
+  final String uid;
   @override
-  State<ChatScreen> createState() => _ChatScreenState();
+  ConsumerState<ChatScreen> createState() => _ChatScreenState();
 }
 
-class _ChatScreenState extends State<ChatScreen> {
+class _ChatScreenState extends ConsumerState<ChatScreen> {
   bool isFieldActive = false;
   String? fieldValue;
   final TextEditingController textController = TextEditingController();
@@ -39,16 +48,24 @@ class _ChatScreenState extends State<ChatScreen> {
             ),
           ),
           centerTitle: false,
-          title: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text('Username'),
-              const Text(
-                'Status',
-                style: TextStyle(fontSize: 14),
-              ),
-            ],
-          ),
+          title: StreamBuilder<UserModel>(
+              stream:
+                  ref.read(authControllerProvider).getUserDataById(widget.uid),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                }
+                return Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(widget.name),
+                    Text(
+                      snapshot.data!.isOnline ? 'online' : 'offline',
+                      style: const TextStyle(fontSize: 14),
+                    ),
+                  ],
+                );
+              }),
           actions: [
             IconButton(
               onPressed: () {},
