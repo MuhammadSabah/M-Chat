@@ -148,4 +148,8 @@ class AuthRepository {
         .doc(auth.currentUser!.uid)
         .update({'isOnline': isOnline});
   }
+
+  void logout() async {
+    await auth.signOut();
+  }
 }

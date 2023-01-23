@@ -1,57 +1,84 @@
 import 'package:final_chat_app/core/app_screens.dart';
+import 'package:final_chat_app/src/features/chat/repository/chat_repository.dart';
 import 'package:final_chat_app/src/features/contacts/widgets/contact_card.dart';
 import 'package:final_chat_app/src/features/contacts/widgets/search_field.dart';
+import 'package:final_chat_app/src/models/chat_contact.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class ContactListScreen extends StatefulWidget {
-  const ContactListScreen({super.key});
-
+class ContactListScreen extends ConsumerWidget {
+  ContactListScreen({super.key});
   @override
-  State<ContactListScreen> createState() => _ContactListScreenState();
-}
-
-class _ContactListScreenState extends State<ContactListScreen> {
-  @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
       onTap: () {
         return FocusManager.instance.primaryFocus?.unfocus();
       },
       child: Scaffold(
         body: SafeArea(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Padding(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10)
-                        .copyWith(bottom: 18),
-                child: SearchField(
-                  hintText: 'Search in chat',
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 14.0)
-                    .copyWith(bottom: 4),
-                child: Text('Chats'),
-              ),
-              Expanded(
-                child: ListView.separated(
-                  separatorBuilder: (context, index) {
-                    return const SizedBox(height: 8);
-                  },
-                  itemCount: 4,
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.pushNamed(context, AppScreens.chatPath);
+          child: StreamBuilder<List<ChatContact>>(
+            stream: ref.watch(chatRepositoryProvider).getChatContacts(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 18.0,
+                      vertical: 10,
+                    ).copyWith(bottom: 18),
+                    child: const SizedBox(
+                      child: TopSearchField(
+                        hintText: 'Search in chat',
+                        name: "Hama",
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0)
+                        .copyWith(bottom: 4),
+                    child: const Text(
+                      'Chats',
+                      style: TextStyle(fontSize: 15),
+                    ),
+                  ),
+                  Expanded(
+                    child: ListView.separated(
+                      separatorBuilder: (context, index) {
+                        return const SizedBox(height: 8);
                       },
-                      child: const ContactCard(),
-                    );
-                  },
-                ),
-              ),
-            ],
+                      itemCount: snapshot.data?.length ?? 0,
+                      itemBuilder: (context, index) {
+                        ChatContact chatContactData = snapshot.data![index];
+                        return InkWell(
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              AppScreens.chatPath,
+                              arguments: {
+                                'name': chatContactData.name,
+                                'uid': chatContactData.contactId,
+                              },
+                            );
+                          },
+                          child: ContactCard(
+                            name: chatContactData.name,
+                            uid: chatContactData.contactId,
+                            cardColor:chatContactData.color,
+                            // Color
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ],
+              );
+            },
           ),
         ),
         floatingActionButton: FloatingActionButton.extended(

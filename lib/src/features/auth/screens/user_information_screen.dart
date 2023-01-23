@@ -81,8 +81,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                                         ),
                                         child: const CircleAvatar(
                                           radius: 64,
-                                          backgroundImage: NetworkImage(
-                                              'https://images.unsplash.com/photo-1661586762551-b595e65388ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60'),
+                                          backgroundColor: Colors.grey,
                                         ),
                                       )
                                     : Container(

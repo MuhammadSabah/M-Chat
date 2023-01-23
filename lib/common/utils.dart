@@ -3,16 +3,20 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 
-// void showCustomSnackbar({
-//   required BuildContext context,
-//   required String content,
-// }) {
-//   ScaffoldMessenger.of(context).showSnackBar(
-//     SnackBar(
-//       content: Text(content),
-//     ),
-//   );
-// }
+
+   List<Color> colors = [
+    Colors.green.shade400,
+    Colors.grey.shade400,
+    Colors.red.shade400,
+    Colors.blue.shade400,
+    Colors.blueAccent.shade400,
+    Colors.pink.shade400,
+    Colors.purple.shade400,
+    Colors.amber.shade400,
+    Colors.yellowAccent.shade400,
+    Colors.orange.shade400,
+    Colors.orangeAccent.shade400,
+  ];
 
 Future<File?> pickImageFromGallery() async {
   File? image;

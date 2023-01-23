@@ -24,7 +24,7 @@ class AddContactRepository {
     List<Contact> contacts = [];
     try {
       if (await FlutterContacts.requestPermission()) {
-        contacts = await FlutterContacts.getContacts(withAccounts: true);
+        contacts = await FlutterContacts.getContacts(withProperties: true);
       }
     } catch (e) {
       debugPrint(e.toString());
@@ -40,7 +40,6 @@ class AddContactRepository {
         UserModel userData = UserModel.fromMap(document.data());
         String selectedPhoneNo =
             selectedContact.phones[0].number.replaceAll(' ', '');
-
         if (selectedPhoneNo == userData.phoneNumber) {
           isFound = true;
           // ignore: use_build_context_synchronously

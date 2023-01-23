@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 
 class ContactCard extends StatelessWidget {
-  const ContactCard({super.key});
+  const ContactCard({
+    super.key,
+    required this.name,
+    required this.uid,
+    required this.cardColor,
+  });
+  final String name;
+  final String uid;
+  final Color cardColor;
 
   @override
   Widget build(BuildContext context) {
@@ -21,25 +29,25 @@ class ContactCard extends StatelessWidget {
                 Ink(
                   height: screenHeight / 17,
                   width: screenWidth / 9.0,
-                  decoration: const BoxDecoration(
-                    color: Colors.green,
-                    borderRadius: BorderRadius.all(
+                  decoration: BoxDecoration(
+                    color: cardColor,
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                   ),
-                  child: const Center(
+                  child: Center(
                     child: Text(
-                      'M',
-                      style: TextStyle(
+                      name.substring(0, 1).toUpperCase(),
+                      style: const TextStyle(
                         fontSize: 26,
                       ),
                     ),
                   ),
                 ),
                 const SizedBox(width: 18),
-                const Text(
-                  'MyChat',
-                  style: TextStyle(
+                Text(
+                  name,
+                  style: const TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w500,
                   ),

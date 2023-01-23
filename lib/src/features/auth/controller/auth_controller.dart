@@ -58,4 +58,8 @@ class AuthController {
   void setUserState(bool isOnline) {
     return authRepository.storeUserState(isOnline);
   }
+
+  void logout() async {
+    authRepository.logout();
+  }
 }

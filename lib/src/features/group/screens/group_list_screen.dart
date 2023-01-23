@@ -16,9 +16,7 @@ class GroupListScreen extends StatelessWidget {
               padding:
                   const EdgeInsets.symmetric(horizontal: 18.0, vertical: 10)
                       .copyWith(bottom: 18),
-              child: SearchField(
-                hintText: 'Search in groups',
-              ),
+              child: Container(),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14.0)
@@ -34,7 +32,7 @@ class GroupListScreen extends StatelessWidget {
                 itemBuilder: (context, index) {
                   return InkWell(
                     onTap: () {},
-                    child: const ContactCard(),
+                    child: Container(),
                   );
                 },
               ),

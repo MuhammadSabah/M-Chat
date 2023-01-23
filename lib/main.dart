@@ -7,6 +7,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import 'firebase_options.dart';
@@ -42,7 +43,7 @@ class MyApp extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return DynamicColorBuilder(
       builder: (lightDynamic, darkDynamic) {
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData(
             colorScheme: lightDynamic ?? _defaultLightColorScheme,
@@ -67,7 +68,7 @@ class MyApp extends ConsumerWidget {
                   if (user == null) {
                     return const RegisterScreen();
                   } else {
-                    return const HomeScreen();
+                    return HomeScreen(user: user);
                   }
                 },
                 error: (err, trace) {

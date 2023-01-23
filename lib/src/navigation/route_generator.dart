@@ -13,11 +13,11 @@ class RouteGenerator {
     switch (settings.name) {
       case AppScreens.home:
         return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
+          builder: (context) => HomeScreen(),
         );
       case AppScreens.contactPath:
         return MaterialPageRoute(
-          builder: (context) => const ContactListScreen(),
+          builder: (context) => ContactListScreen(),
         );
       case AppScreens.chatPath:
         final args = settings.arguments as Map<String, dynamic>;

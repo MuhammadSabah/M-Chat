@@ -1,21 +1,55 @@
+import 'package:final_chat_app/src/features/auth/controller/auth_controller.dart';
 import 'package:final_chat_app/src/features/contacts/screens/contact_list_screen.dart';
 import 'package:final_chat_app/src/features/group/screens/group_list_screen.dart';
+import 'package:final_chat_app/src/models/user_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
-
+class HomeScreen extends ConsumerStatefulWidget {
+  HomeScreen({super.key, this.user});
+  UserModel? user;
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  ConsumerState<HomeScreen> createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen> {
-  List<Widget> pages = const [
-    ContactListScreen(),
-    GroupListScreen(),
-  ];
+class _HomeScreenState extends ConsumerState<HomeScreen>
+    with WidgetsBindingObserver {
   int tabIndex = 0;
   double? iconSize = 28;
+  //
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        ref.read(authControllerProvider).setUserState(true);
+        break;
+      case AppLifecycleState.detached:
+      case AppLifecycleState.inactive:
+      case AppLifecycleState.paused:
+        ref.read(authControllerProvider).setUserState(false);
+        break;
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  List<Widget> pages = [
+    ContactListScreen(),
+    const GroupListScreen(),
+  ];
+
+  //
+  @override
+  void initState() {
+    WidgetsBinding.instance.addObserver(this);
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

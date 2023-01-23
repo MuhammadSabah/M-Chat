@@ -1,15 +1,19 @@
 import 'package:bubble/bubble.dart';
+import 'package:final_chat_app/src/features/chat/widgets/display_message.dart';
+import 'package:final_chat_app/src/models/message_enum.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class SenderMessageCard extends StatelessWidget {
   const SenderMessageCard({
     Key? key,
-    // required this.message,
-    // required this.date,
+    required this.message,
+    required this.date,
+    required this.type,
   }) : super(key: key);
-  // final String message;
-  // final DateTime date;
+  final String message;
+  final DateTime date;
+  final MessageEnum type;
   @override
   Widget build(BuildContext context) {
     return Align(
@@ -28,16 +32,17 @@ class SenderMessageCard extends StatelessWidget {
               margin: const BubbleEdges.symmetric(horizontal: 12, vertical: 6),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.end,
-                children: const [
+                children: [
                   Padding(
-                    padding: EdgeInsets.only(
+                    padding: const EdgeInsets.only(
                       left: 5,
                       right: 6,
                       top: 5,
                       bottom: 6,
                     ),
-                    child: Text(
-                      "Anything lorea jaklf akdjfka dfjakld flka f alf kdjasfipsum askjdfka sdfjdaskf adskf afjas dfjasdfjsad fsadj adskfljsadkf sdjfklas ",
+                    child: DisplayMessage(
+                      message: message,
+                      type: type,
                     ),
                   ),
                 ],
@@ -47,8 +52,7 @@ class SenderMessageCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 Text(
-                  // DateFormat('dd-MM yy, kk:mm').format(date).toString(),
-                  'Date',
+                  DateFormat('dd-MM yy, kk:mm').format(date).toString(),
                   maxLines: 1,
                   textAlign: TextAlign.end,
                   style: TextStyle(
