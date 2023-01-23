@@ -1,4 +1,4 @@
-# final_chat_app
+# M-Chat
 
 A new Flutter project.
 
