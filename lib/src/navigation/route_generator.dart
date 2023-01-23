@@ -17,7 +17,7 @@ class RouteGenerator {
         );
       case AppScreens.contactPath:
         return MaterialPageRoute(
-          builder: (context) => ContactListScreen(),
+          builder: (context) => const ContactListScreen(),
         );
       case AppScreens.chatPath:
         final args = settings.arguments as Map<String, dynamic>;

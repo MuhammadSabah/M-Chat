@@ -5,6 +5,7 @@ import 'package:final_chat_app/src/models/user_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends ConsumerStatefulWidget {
   HomeScreen({super.key, this.user});
   UserModel? user;
@@ -33,7 +34,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   }
 
   List<Widget> pages = [
-    ContactListScreen(),
+    const ContactListScreen(),
     const GroupListScreen(),
   ];
 

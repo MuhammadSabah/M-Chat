@@ -1,5 +1,3 @@
-import 'package:final_chat_app/src/features/contacts/widgets/contact_card.dart';
-import 'package:final_chat_app/src/features/contacts/widgets/search_field.dart';
 import 'package:flutter/material.dart';
 
 class GroupListScreen extends StatelessWidget {
@@ -21,7 +19,7 @@ class GroupListScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14.0)
                   .copyWith(bottom: 4),
-              child: Text('Groups'),
+              child: const Text('Groups'),
             ),
             Expanded(
               child: ListView.separated(

@@ -31,7 +31,6 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
 
   void storeUserData() async {
     String name = nameController.text.trim();
-    print("NAME: " + name);
     if (name.isNotEmpty) {
       ref
           .read(authControllerProvider)
@@ -41,7 +40,6 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
     return GestureDetector(
       onTap: () {
         return FocusManager.instance.primaryFocus?.unfocus();
@@ -130,6 +128,7 @@ class _UserInformationScreenState extends ConsumerState<UserInformationScreen> {
                                   if (value!.isEmpty || value == ' ') {
                                     return 'Name required';
                                   }
+                                  return null;
                                 },
                                 controller: nameController,
                                 decoration: const InputDecoration(

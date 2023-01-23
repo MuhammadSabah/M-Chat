@@ -1,8 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:final_chat_app/common/firebase_storage_repository.dart';
-import 'package:final_chat_app/common/utils.dart';
 import 'package:final_chat_app/core/app_screens.dart';
-import 'package:final_chat_app/home_screen.dart';
 import 'package:final_chat_app/src/models/user_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -80,7 +78,6 @@ class AuthRepository {
         verificationId: verificationId,
         smsCode: userOTP,
       );
-      print(credential);
       await auth.signInWithCredential(credential);
       // ignore: use_build_context_synchronously
       Navigator.pushNamedAndRemoveUntil(
@@ -89,15 +86,14 @@ class AuthRepository {
         (route) => false,
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
-      // Get.snackbar(
-      //   '❌',
-      //   e.message ?? 'Some error occurred!',
-      //   snackPosition: SnackPosition.TOP,
-      //   forwardAnimationCurve: Curves.elasticInOut,
-      //   reverseAnimationCurve: Curves.easeOut,
-      //   colorText: Colors.black,
-      // );
+      Get.snackbar(
+        '❌',
+        e.message ?? 'Some error occurred!',
+        snackPosition: SnackPosition.TOP,
+        forwardAnimationCurve: Curves.elasticInOut,
+        reverseAnimationCurve: Curves.easeOut,
+        colorText: Colors.black,
+      );
     }
   }
 
@@ -108,7 +104,6 @@ class AuthRepository {
     required ProviderRef ref,
     required BuildContext context,
   }) async {
-    print(auth.currentUser!.uid);
     String uid = auth.currentUser!.uid;
     String photoUrl =
         'https://images.unsplash.com/photo-1661586762551-b595e65388ba?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxlZGl0b3JpYWwtZmVlZHwyfHx8ZW58MHx8fHw%3D&auto=format&fit=crop&w=500&q=60';

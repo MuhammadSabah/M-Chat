@@ -1,10 +1,10 @@
-import 'package:final_chat_app/core/app_screens.dart';
 import 'package:final_chat_app/src/features/auth/controller/auth_controller.dart';
 import 'package:final_chat_app/src/features/auth/widgets/bottom_next_button.dart';
 import 'package:final_chat_app/src/features/auth/widgets/otp_form.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+// ignore: must_be_immutable
 class OTPScreen extends ConsumerWidget {
   OTPScreen({super.key, required this.verificationID});
 
@@ -72,8 +72,6 @@ class OTPScreen extends ConsumerWidget {
                         otp5.text +
                         otp6.text;
 
-                    print("******* OTP VALUE: ******" + otpValue);
-                    print("******* OTP VALUE1: ******" + otp1.text);
                     verifyOTP(ref, context, otpValue);
                     FocusManager.instance.primaryFocus?.unfocus();
                   },

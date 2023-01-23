@@ -1,5 +1,4 @@
 import 'package:country_picker/country_picker.dart';
-import 'package:final_chat_app/core/app_screens.dart';
 import 'package:final_chat_app/src/features/auth/controller/auth_controller.dart';
 import 'package:final_chat_app/src/features/auth/widgets/bottom_next_button.dart';
 import 'package:final_chat_app/src/features/auth/widgets/phone_number_form.dart';
@@ -114,8 +113,6 @@ class _RegisterScreenState extends ConsumerState<RegisterScreen> {
                       BottomNextButton(
                         text: 'Next',
                         onPressed: () {
-                          print(_country);
-
                           if (formKey.currentState!.validate() &&
                               _country != null) {
                             sendPhoneNumber();
