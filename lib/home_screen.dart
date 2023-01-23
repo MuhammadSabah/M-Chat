@@ -34,7 +34,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
   }
 
   List<Widget> pages = [
-    const ContactListScreen(),
+     ContactListScreen(),
     const GroupListScreen(),
   ];
 

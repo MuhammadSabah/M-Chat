@@ -42,7 +42,7 @@ class _AddContactScreenState extends ConsumerState<AddContactScreen> {
                 }
                 return ListView.separated(
                   separatorBuilder: (context, index) {
-                    return const SizedBox(height: 8);
+                    return const SizedBox(height: 2);
                   },
                   itemCount: contactList.length,
                   itemBuilder: (context, index) {
@@ -80,7 +80,11 @@ class _AddContactScreenState extends ConsumerState<AddContactScreen> {
                                   radius: 30,
                                 ),
                         ),
-                        trailing: const Icon(Icons.add),
+                        subtitle: Text(contact.phones[0].number.toString()),
+                        trailing: Icon(
+                          Icons.add,
+                          color: Colors.green.shade500,
+                        ),
                         title: Text(
                           contact.displayName.toString(),
                           style: const TextStyle(fontSize: 18),

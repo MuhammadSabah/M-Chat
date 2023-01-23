@@ -41,16 +41,19 @@ class OTPScreen extends ConsumerWidget {
                 const Text(
                   'Verification code',
                   style: TextStyle(
-                    fontSize: 20,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 const SizedBox(
                   height: 4,
                 ),
-                const Text('We have sent the code verification'),
+                const Text(
+                  'We have sent the code verification',
+                  style: TextStyle(fontSize: 14),
+                ),
                 const SizedBox(
-                  height: 16,
+                  height: 28,
                 ),
                 OTPForm(
                   otpFormKey: otpFormKey,

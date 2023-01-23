@@ -250,6 +250,7 @@ class _BottomInputFieldState extends ConsumerState<BottomInputField> {
                 onPressed: () {
                   if (isFieldActive) {
                     sendTextMessage();
+                    textController.clear();
                   }
                 },
                 icon: Icon(

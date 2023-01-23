@@ -1,4 +1,5 @@
 import 'package:final_chat_app/core/app_screens.dart';
+import 'package:final_chat_app/src/features/auth/controller/auth_controller.dart';
 import 'package:final_chat_app/src/features/chat/repository/chat_repository.dart';
 import 'package:final_chat_app/src/features/contacts/widgets/contact_card.dart';
 import 'package:final_chat_app/src/features/contacts/widgets/search_field.dart';
@@ -7,7 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class ContactListScreen extends ConsumerWidget {
-  const ContactListScreen({super.key});
+   ContactListScreen({super.key});
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return GestureDetector(
@@ -39,6 +41,7 @@ class ContactListScreen extends ConsumerWidget {
                       ),
                     ),
                   ),
+                  
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0)
                         .copyWith(bottom: 4),
@@ -54,6 +57,7 @@ class ContactListScreen extends ConsumerWidget {
                       },
                       itemCount: snapshot.data?.length ?? 0,
                       itemBuilder: (context, index) {
+
                         ChatContact chatContactData = snapshot.data![index];
                         return InkWell(
                           onTap: () {
@@ -69,7 +73,7 @@ class ContactListScreen extends ConsumerWidget {
                           child: ContactCard(
                             name: chatContactData.name,
                             uid: chatContactData.contactId,
-                            cardColor:chatContactData.color,
+                            cardColor: chatContactData.color,
                             // Color
                           ),
                         );

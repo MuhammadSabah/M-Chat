@@ -13,7 +13,7 @@ class OTPForm extends StatelessWidget {
     required this.otp5,
     required this.otp6,
   });
-  Color textFieldFillColor = Colors.grey.shade100;
+  Color textFieldFillColor = Colors.white54;
   OutlineInputBorder fieldBorder = OutlineInputBorder(
     borderSide: BorderSide(
       color: Colors.grey.shade100,
